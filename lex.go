@@ -380,6 +380,8 @@ func lexBareKey(lx *lexer) stateFn {
 	switch r := lx.next(); {
 	case isBareKeyChar(r):
 		return lexBareKey
+	case r == tableSep:
+		return lexBareKey
 	case isWhitespace(r):
 		lx.backup()
 		lx.emit(itemText)
